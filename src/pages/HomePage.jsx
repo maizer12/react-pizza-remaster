@@ -15,7 +15,7 @@ function HomePage() {
 		})
 	}, [])
 	return (
-		<div className='container'>
+		<div className='container home'>
 			<div className='content__top'>
 				<Categories />
 				<Sort />
