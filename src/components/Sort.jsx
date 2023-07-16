@@ -29,7 +29,7 @@ function Sort({ change }) {
 					/>
 				</svg>
 				<b>Сортировка по:</b>
-				<span>популярности</span>
+				<span>{sortItems[active].name}</span>
 			</div>
 			{openSort && (
 				<div className='sort__popup'>

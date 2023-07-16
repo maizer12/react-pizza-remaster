@@ -1,7 +1,7 @@
-import React from 'react'
 import logo from '../assets/img/logo.svg'
 import { Link } from 'react-router-dom'
-function Header() {
+import Search from './Search'
+function Header({ search, setSearch }) {
 	return (
 		<div className='header'>
 			<div className='container'>
@@ -12,6 +12,7 @@ function Header() {
 						<p>самая вкусная пицца во вселенной</p>
 					</div>
 				</Link>
+				<Search search={search} setSearch={setSearch} />
 				<div className='header__cart'>
 					<Link to='/cart' className='button button--cart'>
 						<span>520 ₽</span>
