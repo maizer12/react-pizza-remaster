@@ -1,7 +1,4 @@
-import React, { useState } from 'react'
-
-function Categories() {
-	const [active, setActive] = useState(0)
+function Categories({ open, change }) {
 	const categories = [
 		'Все',
 		'Мясные',
@@ -16,8 +13,8 @@ function Categories() {
 				{categories.map((e, i) => (
 					<li
 						key={e}
-						onClick={() => setActive(i)}
-						className={active === i ? 'active' : ''}
+						onClick={() => change(i)}
+						className={open === i ? 'active' : ''}
 					>
 						{e}
 					</li>

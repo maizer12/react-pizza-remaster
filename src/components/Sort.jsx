@@ -1,12 +1,17 @@
 import React, { useState } from 'react'
 
-function Sort() {
+function Sort({ change }) {
 	const [openSort, setOpenSort] = useState(false)
 	const [active, setActive] = useState(0)
-	const sortItems = ['популярности', 'цене', 'алфавиту']
-	const switchSort = i => {
+	const sortItems = [
+		{ name: 'популярности', link: 'rating' },
+		{ name: 'цене', link: 'price' },
+		{ name: 'алфавиту', link: 'title' },
+	]
+	const switchSort = (i, sort) => {
 		setActive(i)
 		setOpenSort(false)
+		change(sort)
 	}
 	return (
 		<div className='sort'>
@@ -31,10 +36,10 @@ function Sort() {
 					<ul>
 						{sortItems.map((e, i) => (
 							<li
-								onClick={() => switchSort(i)}
+								onClick={() => switchSort(i, e.link)}
 								className={active === i && 'active'}
 							>
-								{e}
+								{e.name}
 							</li>
 						))}
 					</ul>

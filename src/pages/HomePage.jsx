@@ -8,17 +8,29 @@ import { useEffect, useState } from 'react'
 function HomePage() {
 	const [cardItems, setCardItems] = useState([])
 	const [loading, setLoading] = useState(true)
+	const [selectedCategory, setSelectedCategory] = useState(0)
+	const [selectedSort, setSelectedSort] = useState('')
 	useEffect(() => {
-		axios('https://64a45f55c3b509573b5772f9.mockapi.io/pizza').then(data => {
-			setCardItems(data.data)
-			setLoading(false)
-		})
-	}, [])
+		setLoading(true)
+		const category = selectedCategory ? selectedCategory : ''
+		axios(
+			'https://64a45f55c3b509573b5772f9.mockapi.io/pizza?category=' +
+				category +
+				'&sortBy=' +
+				selectedSort +
+				'&order=asc'
+		)
+			.then(data => {
+				setCardItems(data.data)
+				setLoading(false)
+			})
+			.catch(e => console.log(e))
+	}, [selectedCategory, selectedSort])
 	return (
 		<div className='container home'>
 			<div className='content__top'>
-				<Categories />
-				<Sort />
+				<Categories open={selectedCategory} change={setSelectedCategory} />
+				<Sort change={setSelectedSort} />
 			</div>
 			<h2 className='content__title'>Все пиццы</h2>
 			<div className='content__items'>

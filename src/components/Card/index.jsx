@@ -1,6 +1,6 @@
 import { useState } from 'react'
 
-function Card({ imageUrl, title, types, sizes }) {
+function Card({ imageUrl, title, types, sizes, price }) {
 	const [activeType, setActiveType] = useState(0)
 	const [activeSize, setActiveSize] = useState(0)
 	const [sum, setSum] = useState(0)
@@ -37,7 +37,7 @@ function Card({ imageUrl, title, types, sizes }) {
 				</ul>
 			</div>
 			<div className='pizza-block__bottom' onClick={addPizza}>
-				<div className='pizza-block__price'>от 395 ₽</div>
+				<div className='pizza-block__price'>от {price} ₽</div>
 				<div className='button button--outline button--add'>
 					<svg
 						width='12'
