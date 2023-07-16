@@ -1,7 +1,9 @@
-import React from 'react'
+import React, { useContext } from 'react'
 import './Search.scss'
 import icon from '../../assets/img/search.svg'
-function Search({ setSearch, search }) {
+import { SearchContext } from '../../App'
+function Search() {
+	const { search, setSearch } = useContext(SearchContext)
 	return (
 		<label className='search'>
 			<input

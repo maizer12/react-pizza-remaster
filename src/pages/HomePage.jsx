@@ -12,7 +12,6 @@ function HomePage({ search }) {
 	const [selectedSort, setSelectedSort] = useState('')
 	useEffect(() => {
 		setLoading(true)
-
 		const category = selectedCategory ? 'category=' + selectedCategory : ''
 		axios(
 			'https://64a45f55c3b509573b5772f9.mockapi.io/pizza?' +
