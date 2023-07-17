@@ -1,6 +1,10 @@
 import React, { useState } from 'react'
+import { useSelector, useDispatch } from 'react-redux'
 
 function Sort({ change }) {
+	const dispatch = useDispatch()
+	const test123 = useSelector(state => state.filterSlice.name)
+	console.log(test123)
 	const [openSort, setOpenSort] = useState(false)
 	const [active, setActive] = useState(0)
 	const sortItems = [
