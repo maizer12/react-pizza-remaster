@@ -1,14 +1,27 @@
-import React, { useContext } from 'react'
+import React, { useCallback, useContext, useState } from 'react'
 import './Search.scss'
 import icon from '../../assets/img/search.svg'
 import { SearchContext } from '../../App'
+import debounce from 'lodash.debounce'
 function Search() {
-	const { search, setSearch } = useContext(SearchContext)
+	const [value, setValue] = useState('')
+	const { setSearch } = useContext(SearchContext)
+	const checkTime = useCallback(
+		debounce(value => {
+			console.log(value)
+			setSearch(value)
+		}, 1000),
+		[]
+	)
+	const change = e => {
+		setValue(e.target.value)
+		checkTime(e.target.value)
+	}
 	return (
 		<label className='search'>
 			<input
-				value={search}
-				onChange={e => setSearch(e.target.value)}
+				value={value}
+				onChange={change}
 				type='text'
 				placeholder='Пошук...'
 				className='search__input'

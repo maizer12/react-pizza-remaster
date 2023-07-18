@@ -14,15 +14,16 @@ function HomePage({ search }) {
 	useEffect(() => {
 		const category = categories ? 'category=' + categories : ''
 		setLoading(true)
-		axios(
-			'https://64a45f55c3b509573b5772f9.mockapi.io/pizza?' +
-				category +
-				'&search=' +
-				search +
-				'&sortBy=' +
-				sort.link +
-				'&order=asc'
-		)
+		axios
+			.get(
+				'https://64a45f55c3b509573b5772f9.mockapi.io/pizza?' +
+					category +
+					'&search=' +
+					search +
+					'&sortBy=' +
+					sort.link +
+					'&order=asc'
+			)
 			.then(data => {
 				setCardItems(data.data)
 				setLoading(false)
