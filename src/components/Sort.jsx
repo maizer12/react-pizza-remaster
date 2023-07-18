@@ -12,8 +12,10 @@ function Sort() {
 	]
 	const [openSort, setOpenSort] = useState(false)
 	const switchSort = elem => {
-		dispatch(setSort(elem))
+		console.log(elem)
+		dispatch(setSort(elem.link))
 	}
+	console.log()
 	return (
 		<div className='sort'>
 			<div className='sort__label' onClick={() => setOpenSort(!openSort)}>
@@ -30,7 +32,7 @@ function Sort() {
 					/>
 				</svg>
 				<b>Сортировка по:</b>
-				<span>{sort.name}</span>
+				<span>{sortItems.find(e => e.link === sort).name}</span>
 			</div>
 			{openSort && (
 				<div className='sort__popup'>
@@ -39,7 +41,7 @@ function Sort() {
 							<li
 								onClick={() => switchSort(e)}
 								key={e.name}
-								className={sort.name === e.name ? 'active' : ''}
+								className={sort === e.link ? 'active' : ''}
 							>
 								{e.name}
 							</li>

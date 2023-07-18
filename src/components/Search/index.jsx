@@ -8,9 +8,8 @@ function Search() {
 	const { setSearch } = useContext(SearchContext)
 	const checkTime = useCallback(
 		debounce(value => {
-			console.log(value)
 			setSearch(value)
-		}, 1000),
+		}, 250),
 		[]
 	)
 	const change = e => {
