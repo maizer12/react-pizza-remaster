@@ -1,18 +1,22 @@
 import { createSlice } from '@reduxjs/toolkit'
 
 const initialState = {
-	name: 132,
+	sort: { name: 'популярности', link: 'rating' },
+	categories: 0,
 }
 
 const filterSlice = createSlice({
 	name: 'filter',
 	initialState,
 	reducers: {
-		setTest: (state, action) => {
-			state.test += 1
+		setSort: (state, action) => {
+			state.sort = action.payload
+		},
+		setCategories: (state, action) => {
+			state.categories = action.payload
 		},
 	},
 })
 
-export const { setTest } = filterSlice.actions
+export const { setSort, setCategories } = filterSlice.actions
 export default filterSlice.reducer

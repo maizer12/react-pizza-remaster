@@ -1,21 +1,18 @@
-import React, { useState } from 'react'
+import { useState } from 'react'
 import { useSelector, useDispatch } from 'react-redux'
+import { setSort } from '../store/slices/filterSlice'
 
-function Sort({ change }) {
+function Sort() {
+	const sort = useSelector(state => state.filterSlice.sort)
 	const dispatch = useDispatch()
-	const test123 = useSelector(state => state.filterSlice.name)
-	console.log(test123)
-	const [openSort, setOpenSort] = useState(false)
-	const [active, setActive] = useState(0)
 	const sortItems = [
 		{ name: 'популярности', link: 'rating' },
 		{ name: 'цене', link: 'price' },
 		{ name: 'алфавиту', link: 'title' },
 	]
-	const switchSort = (i, sort) => {
-		setActive(i)
-		setOpenSort(false)
-		change(sort)
+	const [openSort, setOpenSort] = useState(false)
+	const switchSort = elem => {
+		dispatch(setSort(elem))
 	}
 	return (
 		<div className='sort'>
@@ -33,15 +30,16 @@ function Sort({ change }) {
 					/>
 				</svg>
 				<b>Сортировка по:</b>
-				<span>{sortItems[active].name}</span>
+				<span>{sort.name}</span>
 			</div>
 			{openSort && (
 				<div className='sort__popup'>
 					<ul>
-						{sortItems.map((e, i) => (
+						{sortItems.map(e => (
 							<li
-								onClick={() => switchSort(i, e.link)}
-								className={active === i && 'active'}
+								onClick={() => switchSort(e)}
+								key={e.name}
+								className={sort.name === e.name ? 'active' : ''}
 							>
 								{e.name}
 							</li>

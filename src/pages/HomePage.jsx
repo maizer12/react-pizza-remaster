@@ -1,4 +1,5 @@
 import React from 'react'
+import { useSelector } from 'react-redux'
 import Categories from '../components/Categories'
 import Sort from '../components/Sort'
 import Card from '../components/Card'
@@ -6,20 +7,20 @@ import Load from '../components/Card/Load'
 import axios from 'axios'
 import { useEffect, useState } from 'react'
 function HomePage({ search }) {
+	const { sort, categories } = useSelector(state => state.filterSlice)
+
 	const [cardItems, setCardItems] = useState([])
 	const [loading, setLoading] = useState(true)
-	const [selectedCategory, setSelectedCategory] = useState(0)
-	const [selectedSort, setSelectedSort] = useState('')
 	useEffect(() => {
+		const category = categories ? 'category=' + categories : ''
 		setLoading(true)
-		const category = selectedCategory ? 'category=' + selectedCategory : ''
 		axios(
 			'https://64a45f55c3b509573b5772f9.mockapi.io/pizza?' +
 				category +
 				'&search=' +
 				search +
 				'&sortBy=' +
-				selectedSort +
+				sort.link +
 				'&order=asc'
 		)
 			.then(data => {
@@ -27,12 +28,12 @@ function HomePage({ search }) {
 				setLoading(false)
 			})
 			.catch(e => console.log(e))
-	}, [selectedCategory, selectedSort, search])
+	}, [categories, sort, search])
 	return (
 		<div className='container home'>
 			<div className='content__top'>
-				<Categories open={selectedCategory} change={setSelectedCategory} />
-				<Sort change={setSelectedSort} />
+				<Categories />
+				<Sort />
 			</div>
 			<h2 className='content__title'>Все пиццы</h2>
 			<div className='content__items'>

@@ -1,4 +1,9 @@
-function Categories({ open, change }) {
+import { useDispatch, useSelector } from 'react-redux'
+import { setCategories } from '../store/slices/filterSlice'
+
+function Categories() {
+	const open = useSelector(state => state.filterSlice.categories)
+	const dispatch = useDispatch()
 	const categories = [
 		'Все',
 		'Мясные',
@@ -7,6 +12,9 @@ function Categories({ open, change }) {
 		'Острые',
 		'Закрытые',
 	]
+	const change = i => {
+		dispatch(setCategories(i))
+	}
 	return (
 		<div className='categories'>
 			<ul>
