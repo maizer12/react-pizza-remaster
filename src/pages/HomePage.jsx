@@ -34,7 +34,6 @@ function HomePage({ search }) {
 	}, [categories, sort, search])
 
 	const getDate = obj => {
-		console.log(obj)
 		dispatch(setSort(obj.sortBy))
 		dispatch(setCategories(Number(obj.category)))
 	}
